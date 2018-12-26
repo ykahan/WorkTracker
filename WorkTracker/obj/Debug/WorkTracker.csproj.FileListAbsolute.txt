@@ -1,0 +1,10 @@
+C:\Users\USER\source\repos\WorkTracker\WorkTracker\bin\Debug\WorkTracker.exe.config
+C:\Users\USER\source\repos\WorkTracker\WorkTracker\bin\Debug\WorkTracker.exe
+C:\Users\USER\source\repos\WorkTracker\WorkTracker\bin\Debug\WorkTracker.pdb
+C:\Users\USER\source\repos\WorkTracker\WorkTracker\obj\Debug\WorkTracker.csprojResolveAssemblyReference.cache
+C:\Users\USER\source\repos\WorkTracker\WorkTracker\obj\Debug\WorkTracker.Form1.resources
+C:\Users\USER\source\repos\WorkTracker\WorkTracker\obj\Debug\WorkTracker.Properties.Resources.resources
+C:\Users\USER\source\repos\WorkTracker\WorkTracker\obj\Debug\WorkTracker.csproj.GenerateResource.Cache
+C:\Users\USER\source\repos\WorkTracker\WorkTracker\obj\Debug\WorkTracker.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\WorkTracker\WorkTracker\obj\Debug\WorkTracker.exe
+C:\Users\USER\source\repos\WorkTracker\WorkTracker\obj\Debug\WorkTracker.pdb
