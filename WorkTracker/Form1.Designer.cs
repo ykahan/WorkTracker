@@ -80,8 +80,9 @@
             this.Controls.Add(this.JobsComboBox);
             this.Controls.Add(this.StopButton);
             this.Controls.Add(this.StartButton);
+            this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Work Tracker by Yehoshua Kahan";
+            this.Text = "Work Tracker";
             this.ResumeLayout(false);
 
         }

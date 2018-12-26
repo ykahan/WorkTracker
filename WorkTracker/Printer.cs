@@ -9,7 +9,6 @@ namespace WorkTracker
 {
     public static class Printer
     {
-        StreamWriter sw = new StreamWriter()
 
         internal static string StartTime(DateTime dt)
         {
