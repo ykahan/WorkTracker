@@ -35,14 +35,14 @@ namespace WorkTracker
             
             if (start)
             {
-                StartButton.Enabled = false;
-                StopButton.Enabled = true;
+                StartButton.Visible = false;
+                StopButton.Visible = true;
                 message = Printer.StartTime(dt);
             }
             else
             {
-                StopButton.Enabled = false;
-                StartButton.Enabled = true;
+                StopButton.Visible = false;
+                StartButton.Visible = true;
                 message = Printer.StopTime(dt);
             }
 

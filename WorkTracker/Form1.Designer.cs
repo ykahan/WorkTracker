@@ -36,7 +36,7 @@
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(12, 190);
+            this.StartButton.Location = new System.Drawing.Point(95, 190);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(75, 23);
             this.StartButton.TabIndex = 0;
@@ -46,13 +46,13 @@
             // 
             // StopButton
             // 
-            this.StopButton.Enabled = false;
-            this.StopButton.Location = new System.Drawing.Point(176, 190);
+            this.StopButton.Location = new System.Drawing.Point(95, 190);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(75, 23);
             this.StopButton.TabIndex = 1;
             this.StopButton.Text = "Stop";
             this.StopButton.UseVisualStyleBackColor = true;
+            this.StopButton.Visible = false;
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // JobsComboBox
