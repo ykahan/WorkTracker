@@ -12,6 +12,8 @@ namespace WorkTracker
 {
     public partial class Form1 : Form
     {
+        string path = @"C:\Users\USER\Documents\Yehoshua\WorkTrackerOutputs\whatever.txt";
+
         public Form1()
         {
             InitializeComponent();
@@ -32,18 +34,18 @@ namespace WorkTracker
             
             DateTime dt = DateTime.Now;
             string message = "";
-            
+            Printer printer = new Printer(path);
             if (start)
             {
                 StartButton.Visible = false;
                 StopButton.Visible = true;
-                message = Printer.StartTime(dt);
+                message = printer.StartTime(dt, path);
             }
             else
             {
                 StopButton.Visible = false;
                 StartButton.Visible = true;
-                message = Printer.StopTime(dt);
+                message = printer.StopTime(dt, path);
             }
 
             OutputText.Text = message;
