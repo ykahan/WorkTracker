@@ -24,17 +24,37 @@ namespace WorkTracker
         private string GetTimeStarted()
         {
             List<String> list = GetListOfLines();
-            for(int line = list.Count() - 1; line >= 0; line--)
+            int lastStarted = GetLastStarted(list);
+            string startedLine;
+            if (lastStarted > -1)
             {
-                // check if line contains the word "Start."  If so, break out of the
-                // loop, find the time elements, and start analysis.  Might need to
-                // extract a method.
+                startedLine = list[lastStarted].ToString();
+                string[] startArray = startedLine.Split(' ');
+                string[] dateTimeArray = ExtractDateTime(startArray);
             }
+        }
+
+        private string[] ExtractDateTime(string[] startArray)
+        {
+            string[] target = new string[startArray.Length - 1];
+            for (int word = 1; word < startArray.Length; word++) target[word - 1] = startArray[word];
+            return target;
+        }
+
+        private int GetLastStarted(List<String> list)
+        {
+            string ls;
+            for (int line = list.Count() - 1; line > -1; line--)
+            {
+                ls = list[line].ToString();
+                if (ls.Contains("Started")) return line;
+            }
+            return -1;
         }
 
         private List<String> GetListOfLines()
         {
-            List<String> stringList = new List<String>);
+            List<String> stringList = new List<String>();
             string line;
             using (StreamReader sr = new StreamReader(path))
             {
