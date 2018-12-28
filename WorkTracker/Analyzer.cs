@@ -24,6 +24,12 @@ namespace WorkTracker
         private string GetTimeStarted()
         {
             List<String> list = GetListOfLines();
+            for(int line = list.Count() - 1; line >= 0; line--)
+            {
+                // check if line contains the word "Start."  If so, break out of the
+                // loop, find the time elements, and start analysis.  Might need to
+                // extract a method.
+            }
         }
 
         private List<String> GetListOfLines()
