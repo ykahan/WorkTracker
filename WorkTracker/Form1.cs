@@ -46,6 +46,8 @@ namespace WorkTracker
                 StopButton.Visible = false;
                 StartButton.Visible = true;
                 message = printer.StopTime(dt, path);
+                Analyzer an = new Analyzer(path);
+                string TimeElapsed = an.GetElapsedTime();
             }
 
             OutputText.Text = message;
