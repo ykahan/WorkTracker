@@ -35,6 +35,7 @@ namespace WorkTracker
             DateTime dt = DateTime.Now;
             string message = "";
             Printer printer = new Printer(path);
+            string TimeElapsed = "";
             if (start)
             {
                 StartButton.Visible = false;
@@ -46,11 +47,11 @@ namespace WorkTracker
                 StopButton.Visible = false;
                 StartButton.Visible = true;
                 message = printer.StopTime(dt, path);
-                Analyzer an = new Analyzer(path);
-                string TimeElapsed = an.GetElapsedTime();
+                TimeElapsed = printer.TimeWorked();
             }
 
             OutputText.Text = message;
+            if (!start) OutputText.Text += "\n" + TimeElapsed;
         }
     }
 }

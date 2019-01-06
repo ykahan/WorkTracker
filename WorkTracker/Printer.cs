@@ -14,7 +14,6 @@ namespace WorkTracker
         public Printer(string path)
         {
             this.path = path;
-            FileStream fappend = new FileStream(path, FileMode.Append);
         }
 
         public string StartTime(DateTime dt, string path)
@@ -23,21 +22,30 @@ namespace WorkTracker
             string message = $"You began working at \n{dt.ToString("f")}.";
             using (StreamWriter sw = new StreamWriter(path, true))
                 sw.WriteLine("Started: " + dt.ToString("f"));
+
             return message;
         }
 
-        internal string StopTime(DateTime dt, string path)
+        public string StopTime(DateTime dt, string path)
         {
-            //StringBuilder sb = new StringBuilder();
             string message = $"You stopped working at \n{dt.ToString("f")}.";
             using (StreamWriter sw = new StreamWriter(path, true))
-            {
                 sw.WriteLine("Stopped: " + dt.ToString("f"));
+
+            return message;
+        }
+
+        internal string TimeWorked()
+        {
+            Analyzer an = new Analyzer(path);
+            string output = an.GetElapsedTimeAsString();
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+                sw.WriteLine(output);
                 sw.WriteLine();
             }
-            //sb.Append(message);
-            //message = $"\nThis took {dt.}"
-            return message;
+
+            return output;
         }
     }
 }

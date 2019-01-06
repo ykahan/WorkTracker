@@ -16,38 +16,84 @@ namespace WorkTracker
             this.path = path;
         }
 
-        internal string GetElapsedTime()
+        public string GetElapsedTimeAsString()
         {
-            string TimeStarted = GetTimeStarted();
+            int elapsedMinutes = GetElapsedMinutes();
+            int elapsedHours = elapsedMinutes / 60;
+            elapsedMinutes %= 60;
+            return $"Work lasted {elapsedHours} hours and {elapsedMinutes} minutes.";
         }
 
-        private string GetTimeStarted()
+        private int GetElapsedMinutes()
+        {
+            string[] StartTimeStringArray = GetTimeRecorded(true);
+            string[] StopTimeStringArray = GetTimeRecorded(false);
+
+            int[] StartTimeIntArray = GetHourAndMinute(StartTimeStringArray);
+            string startAMorPM = StartTimeStringArray[2];
+
+            int[] EndTimeIntArray = GetHourAndMinute(StopTimeStringArray);
+            string endAMorPM = StopTimeStringArray[2];
+
+            int startTimeInMinutes = GetTimeInMinutes(StartTimeIntArray[0], StartTimeIntArray[1], startAMorPM);
+            int endTimeInMinutes = GetTimeInMinutes(EndTimeIntArray[0], EndTimeIntArray[1], endAMorPM);
+
+            int hoursInDay = 24;
+            int minutesInHour = 60;
+            if (startTimeInMinutes < endTimeInMinutes) startTimeInMinutes += hoursInDay * minutesInHour;
+
+            return endTimeInMinutes - startTimeInMinutes;
+        }
+
+        private int[] GetHourAndMinute(string[] source)
+        {
+            int[] result = new int[2];
+            if (int.TryParse(source[0], out int hours)) result[0] = hours;
+            if (int.TryParse(source[1], out int minutes)) result[1] = minutes;
+            return result;
+        }
+
+        private int GetTimeInMinutes(int hours, int minutes, string period)
+        {
+            int minutesInHour = 60;
+            if (hours == 12) hours = 0;
+            if (period.Equals("PM")) hours += 12;
+            return (hours * minutesInHour) + minutes;
+        }
+
+        private string[] GetTimeRecorded(bool start)
         {
             List<String> list = GetListOfLines();
-            int lastStarted = GetLastStarted(list);
-            string startedLine;
-            if (lastStarted > -1)
+            int targetLine = GetLastStarted(list, start);
+            string splitTargetLine;
+            string[] time = new string[3];
+            if (targetLine > -1)
             {
-                startedLine = list[lastStarted].ToString();
-                string[] startArray = startedLine.Split(' ');
-                string[] dateTimeArray = ExtractDateTime(startArray);
+                splitTargetLine = list[targetLine].ToString();
+                string[] startArray = splitTargetLine.Split(' ');
+                string[] hour = startArray[5].Split(':');
+                time[0] = hour[0];
+                time[1] = hour[1];
+                time[2] = startArray[6];
             }
+            return time;
         }
 
-        private string[] ExtractDateTime(string[] startArray)
-        {
-            string[] target = new string[startArray.Length - 1];
-            for (int word = 1; word < startArray.Length; word++) target[word - 1] = startArray[word];
-            return target;
-        }
+        //private string[] ExtractDateTime(string[] startArray)
+        //{
+        //    string[] target = new string[startArray.Length - 1];
+        //    for (int word = 1; word < startArray.Length; word++) target[word - 1] = startArray[word];
+        //    return target;
+        //}
 
-        private int GetLastStarted(List<String> list)
+        private int GetLastStarted(List<String> list, bool start)
         {
             string ls;
             for (int line = list.Count() - 1; line > -1; line--)
             {
                 ls = list[line].ToString();
-                if (ls.Contains("Started")) return line;
+                if (start && ls.Contains("Started")) return line;
+                if (!start && ls.Contains("Stopped")) return line;
             }
             return -1;
         }
