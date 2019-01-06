@@ -30,8 +30,9 @@
         {
             this.StartButton = new System.Windows.Forms.Button();
             this.StopButton = new System.Windows.Forms.Button();
-            this.JobsComboBox = new System.Windows.Forms.ComboBox();
             this.OutputText = new System.Windows.Forms.Label();
+            this.JobTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // StartButton
@@ -55,14 +56,6 @@
             this.StopButton.Visible = false;
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
-            // JobsComboBox
-            // 
-            this.JobsComboBox.FormattingEnabled = true;
-            this.JobsComboBox.Location = new System.Drawing.Point(130, 40);
-            this.JobsComboBox.Name = "JobsComboBox";
-            this.JobsComboBox.Size = new System.Drawing.Size(121, 21);
-            this.JobsComboBox.TabIndex = 2;
-            // 
             // OutputText
             // 
             this.OutputText.Location = new System.Drawing.Point(13, 121);
@@ -71,19 +64,37 @@
             this.OutputText.TabIndex = 3;
             this.OutputText.Text = "Nothing done yet.";
             // 
+            // JobTextBox
+            // 
+            this.JobTextBox.Location = new System.Drawing.Point(95, 46);
+            this.JobTextBox.Name = "JobTextBox";
+            this.JobTextBox.Size = new System.Drawing.Size(100, 20);
+            this.JobTextBox.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(55, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(24, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Job";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.JobTextBox);
             this.Controls.Add(this.OutputText);
-            this.Controls.Add(this.JobsComboBox);
             this.Controls.Add(this.StopButton);
             this.Controls.Add(this.StartButton);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Work Tracker";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -91,8 +102,9 @@
 
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.Button StopButton;
-        private System.Windows.Forms.ComboBox JobsComboBox;
         private System.Windows.Forms.Label OutputText;
+        private System.Windows.Forms.TextBox JobTextBox;
+        private System.Windows.Forms.Label label1;
     }
 }
 

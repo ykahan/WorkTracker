@@ -40,7 +40,7 @@ namespace WorkTracker
 
             int hoursInDay = 24;
             int minutesInHour = 60;
-            if (startTimeInMinutes < endTimeInMinutes) startTimeInMinutes += hoursInDay * minutesInHour;
+            if (endTimeInMinutes < startTimeInMinutes) endTimeInMinutes += hoursInDay * minutesInHour;
 
             return endTimeInMinutes - startTimeInMinutes;
         }

@@ -12,7 +12,7 @@ namespace WorkTracker
 {
     public partial class Form1 : Form
     {
-        string path = @"C:\Users\USER\Documents\Yehoshua\WorkTrackerOutputs\whatever.txt";
+        string path = @"C:\Users\USER\Documents\Yehoshua\WorkTrackerOutputs\";
 
         public Form1()
         {
@@ -21,37 +21,46 @@ namespace WorkTracker
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            StampTime(true);
+            if (!JobTextBox.Text.Equals("")) StampTime(true);
+            else OutputText.Text = NoJobEntered();
+        }
+
+        private string NoJobEntered()
+        {
+            return "Please enter a job in the job text box above.";
         }
 
         private void StopButton_Click(object sender, EventArgs e)
         {
-            StampTime(false);
+            if (!JobTextBox.Text.Equals("")) StampTime(false);
+            else OutputText.Text = NoJobEntered();
         }
 
         private void StampTime(bool start)
         {
-            
+
             DateTime dt = DateTime.Now;
             string message = "";
-            Printer printer = new Printer(path);
+            string job = JobTextBox.Text;
+            Printer printer = new Printer(path, job);
+            //OutputText.Text = printer.path;
             string TimeElapsed = "";
             if (start)
             {
                 StartButton.Visible = false;
                 StopButton.Visible = true;
-                message = printer.StartTime(dt, path);
+                message = printer.StartTime(dt);
             }
             else
             {
                 StopButton.Visible = false;
                 StartButton.Visible = true;
-                message = printer.StopTime(dt, path);
+                message = printer.StopTime(dt);
                 TimeElapsed = printer.TimeWorked();
             }
 
             OutputText.Text = message;
-            if (!start) OutputText.Text += "\n" + TimeElapsed;
+            //    if (!start) OutputText.Text += "\n" + TimeElapsed;
         }
     }
 }

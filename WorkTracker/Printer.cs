@@ -4,19 +4,26 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace WorkTracker
 {
     public class Printer
     {
-        string path;
+        public string path;
+        string job;
 
-        public Printer(string path)
+        public Printer(string path, string job)
         {
             this.path = path;
+            this.job = job;
+            DateTime dt = DateTime.Now;
+            string currentMonth = dt.ToString("MMM");
+            string currentYear = dt.Year.ToString();
+            this.path += $"{this.job}_{currentYear}_{currentMonth}.txt";
         }
 
-        public string StartTime(DateTime dt, string path)
+        public string StartTime(DateTime dt)
         {
             string month = dt.Month.ToString();
             string message = $"You began working at \n{dt.ToString("f")}.";
@@ -26,7 +33,7 @@ namespace WorkTracker
             return message;
         }
 
-        public string StopTime(DateTime dt, string path)
+        public string StopTime(DateTime dt)
         {
             string message = $"You stopped working at \n{dt.ToString("f")}.";
             using (StreamWriter sw = new StreamWriter(path, true))
