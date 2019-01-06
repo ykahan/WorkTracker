@@ -43,8 +43,8 @@ namespace WorkTracker
             string message = "";
             string job = JobTextBox.Text;
             Printer printer = new Printer(path, job);
-            //OutputText.Text = printer.path;
             string TimeElapsed = "";
+
             if (start)
             {
                 StartButton.Visible = false;
@@ -60,7 +60,7 @@ namespace WorkTracker
             }
 
             OutputText.Text = message;
-            //    if (!start) OutputText.Text += "\n" + TimeElapsed;
+            if (!start) OutputText.Text += "\n" + TimeElapsed;
         }
     }
 }
