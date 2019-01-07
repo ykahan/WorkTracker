@@ -45,13 +45,18 @@ namespace WorkTracker
         internal string TimeWorked()
         {
             Analyzer an = new Analyzer(path);
-            string output = an.GetElapsedTimeAsString();
+            string timeElapsedThisSession = an.GetTimeElapsedThisSessionAsString();
+            using (StreamWriter sw = new StreamWriter(path, true))
+                sw.WriteLine(timeElapsedThisSession);
+
+            string timeElapsedThisMonth = an.GetTimeElapsedThisMonthAsString();
             using (StreamWriter sw = new StreamWriter(path, true))
             {
-                sw.WriteLine(output);
+                sw.WriteLine(timeElapsedThisMonth);
                 sw.WriteLine();
             }
 
+            string output = timeElapsedThisSession + "\n" + timeElapsedThisMonth;
             return output;
         }
     }

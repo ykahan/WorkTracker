@@ -16,30 +16,32 @@ namespace WorkTracker
             this.path = path;
         }
 
-        public string GetElapsedTimeAsString()
+        public string GetTimeElapsedThisSessionAsString()
         {
             int elapsedMinutesThisSession = GetElapsedMinutesThisSession();
             int elapsedHoursThisSession = elapsedMinutesThisSession / 60;
             elapsedMinutesThisSession %= 60;
 
-            int[] elapsedTimeThisMonth = GetElapsedTimeThisMonth();
-
-            string message = $"Work lasted {elapsedHoursThisSession} hours and {elapsedMinutesThisSession} minutes.\n";
-            message += $"Total work this month: {elapsedTimeThisMonth[0]} hours and {elapsedTimeThisMonth[1]} minute.";
-            return message;
+            return $"Work lasted {elapsedHoursThisSession} hour(s) and {elapsedMinutesThisSession} minute(s).";
         }
 
-        private int[] GetElapsedTimeThisMonth()
+        public string GetTimeElapsedThisMonthAsString()
         {
-         
+
             int[] hoursAndMinutesArray = GetElapsedHoursAndMinutes();
 
+            hoursAndMinutesArray = ConsolidateHoursAndMinutes(hoursAndMinutesArray);
+
+            return $"Total work this month: {hoursAndMinutesArray[0]} hour(s) and {hoursAndMinutesArray[1]} minute(s).";
+        }
+
+        private int[] ConsolidateHoursAndMinutes(int[] hoursAndMinutesArray)
+        {
             if (hoursAndMinutesArray[1] >= 60)
             {
                 hoursAndMinutesArray[0] += hoursAndMinutesArray[1] / 60;
                 hoursAndMinutesArray[1] = hoursAndMinutesArray[1] % 60;
             }
-
             return hoursAndMinutesArray;
         }
 
@@ -119,13 +121,6 @@ namespace WorkTracker
             }
             return time;
         }
-
-        //private string[] ExtractDateTime(string[] startArray)
-        //{
-        //    string[] target = new string[startArray.Length - 1];
-        //    for (int word = 1; word < startArray.Length; word++) target[word - 1] = startArray[word];
-        //    return target;
-        //}
 
         private int GetLastStarted(List<String> list, bool start)
         {

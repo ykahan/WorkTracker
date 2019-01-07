@@ -43,7 +43,7 @@ namespace WorkTracker
             string message = "";
             string job = JobTextBox.Text;
             Printer printer = new Printer(path, job);
-            string TimeElapsed = "";
+            string TimeElapsedThisSession = "";
 
             if (start)
             {
@@ -56,11 +56,11 @@ namespace WorkTracker
                 StopButton.Visible = false;
                 StartButton.Visible = true;
                 message = printer.StopTime(dt);
-                TimeElapsed = printer.TimeWorked();
+                TimeElapsedThisSession = printer.TimeWorked();
             }
 
             OutputText.Text = message;
-            if (!start) OutputText.Text += "\n" + TimeElapsed;
+            if (!start) OutputText.Text += "\n" + TimeElapsedThisSession;
         }
     }
 }
