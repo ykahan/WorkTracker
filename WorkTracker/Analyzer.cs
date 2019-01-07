@@ -18,13 +18,54 @@ namespace WorkTracker
 
         public string GetElapsedTimeAsString()
         {
-            int elapsedMinutes = GetElapsedMinutes();
-            int elapsedHours = elapsedMinutes / 60;
-            elapsedMinutes %= 60;
-            return $"Work lasted {elapsedHours} hours and {elapsedMinutes} minutes.";
+            int elapsedMinutesThisSession = GetElapsedMinutesThisSession();
+            int elapsedHoursThisSession = elapsedMinutesThisSession / 60;
+            elapsedMinutesThisSession %= 60;
+
+            int[] elapsedTimeThisMonth = GetElapsedTimeThisMonth();
+
+            string message = $"Work lasted {elapsedHoursThisSession} hours and {elapsedMinutesThisSession} minutes.\n";
+            message += $"Total work this month: {elapsedTimeThisMonth[0]} hours and {elapsedTimeThisMonth[1]} minute.";
+            return message;
         }
 
-        private int GetElapsedMinutes()
+        private int[] GetElapsedTimeThisMonth()
+        {
+         
+            int[] hoursAndMinutesArray = GetElapsedHoursAndMinutes();
+
+            if (hoursAndMinutesArray[1] >= 60)
+            {
+                hoursAndMinutesArray[0] += hoursAndMinutesArray[1] / 60;
+                hoursAndMinutesArray[1] = hoursAndMinutesArray[1] % 60;
+            }
+
+            return hoursAndMinutesArray;
+        }
+
+        private int[] GetElapsedHoursAndMinutes()
+        {
+            List<string> text = GetListOfLines();
+            int minutes = 0;
+            int hours = 0;
+
+            foreach (string line in text)
+            {
+                if (line.Contains("Work"))
+                {
+                    string[] lineArray = line.Split(' ');
+                    if (int.TryParse(lineArray[2], out int hoursFound)) hours += hoursFound;
+                    if (int.TryParse(lineArray[5], out int minutesFound)) minutes += minutesFound;
+                }
+            }
+
+            int[] output = new int[2];
+            output[0] = hours;
+            output[1] = minutes;
+            return output;
+        }
+
+        private int GetElapsedMinutesThisSession()
         {
             string[] StartTimeStringArray = GetTimeRecorded(true);
             string[] StopTimeStringArray = GetTimeRecorded(false);
