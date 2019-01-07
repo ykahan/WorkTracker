@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.StartButton = new System.Windows.Forms.Button();
             this.StopButton = new System.Windows.Forms.Button();
             this.OutputText = new System.Windows.Forms.Label();
@@ -90,6 +91,7 @@
             this.Controls.Add(this.OutputText);
             this.Controls.Add(this.StopButton);
             this.Controls.Add(this.StartButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Work Tracker";
