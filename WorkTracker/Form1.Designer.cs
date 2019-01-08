@@ -59,9 +59,10 @@
             // 
             // OutputText
             // 
+            this.OutputText.AutoSize = true;
             this.OutputText.Location = new System.Drawing.Point(13, 121);
             this.OutputText.Name = "OutputText";
-            this.OutputText.Size = new System.Drawing.Size(238, 57);
+            this.OutputText.Size = new System.Drawing.Size(91, 13);
             this.OutputText.TabIndex = 3;
             this.OutputText.Text = "Nothing done yet.";
             // 
